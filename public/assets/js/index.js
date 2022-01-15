@@ -10,6 +10,7 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
+  
 
 }
 
@@ -49,14 +50,14 @@ const deleteNote = (id) =>
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+  })
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly', true);
+    noteText.setAttribute('readonly',true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
@@ -65,21 +66,23 @@ const renderActiveNote = () => {
     noteTitle.value = '';
     noteText.value = '';
   }
-};
+}
 
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  
+  saveNote(newNote)
+  .then(getAndRenderNotes())
+  .then(renderActiveNote())
+  .then(location.reload())
+
 };
 
 // Delete the clicked note
-const handleNoteDelete = (e) => {
+const handleNoteDelete = e => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
@@ -90,10 +93,12 @@ const handleNoteDelete = (e) => {
     activeNote = {};
   }
 
-  deleteNote(noteId).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  deleteNote(noteId)
+  .then(getAndRenderNotes())
+  .then(renderActiveNote())
+  .then(location.reload())
+    
+    
 };
 
 // Sets the activeNote and displays it
@@ -120,7 +125,6 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
-  // console.log(jsonNotes, 'sup')
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -181,5 +185,6 @@ if (window.location.pathname === '/notes') {
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
+
 
 getAndRenderNotes();
