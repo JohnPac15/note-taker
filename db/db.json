@@ -1,1 +1,7 @@
-[{"title":"testing the update method","text":"testing ","id":0},{"title":"testing the update method","text":"testing  jkjkj","id":1}]
+[
+    {
+        "title":"Test Title",
+        "text":"Test text",
+        "id":0
+    }
+]
