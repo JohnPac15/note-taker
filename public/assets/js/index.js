@@ -55,12 +55,16 @@ const deleteNote = (id) =>
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
-  if (activeNote.id) {
-    noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly',true);
+  console.log('------inside renderactive note -------',activeNote.id)
+
+  if (activeNote.id >= 0) {
+    console.log('---if---')
+    // noteTitle.setAttribute('readonly', true);
+    // noteText.setAttribute('readonly',true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
+    console.log('--else---')
     noteTitle.removeAttribute('readonly');
     noteText.removeAttribute('readonly');
     noteTitle.value = '';
@@ -88,6 +92,7 @@ const handleNoteDelete = e => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  
 
   if (activeNote.id === noteId) {
     activeNote = {};
@@ -105,6 +110,7 @@ const handleNoteDelete = e => {
 const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  console.log('---inside handle note view---', activeNote)
   renderActiveNote();
 };
 

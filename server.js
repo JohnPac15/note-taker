@@ -46,6 +46,7 @@ app.post("/api/notes", (req, res) => {
     //add the new noteNote we made above to the db.json array
     parseData.push(newNote);
     console.log("readfile 3", parseData);
+
     // adds a id to each new note
     parseData.forEach((item, i) => {
       item.id = i + 0;
@@ -82,10 +83,6 @@ app.delete(`/api/notes/:number`, (req, res) => {
     //this is going to delete the note from the db.json Object
     let spliceSelectedIndex = parseData.splice(x, 1);
     console.log(spliceSelectedIndex, "delete 2", parseData)
-
-    // const newNoteArrayAfterDeleteNote =[]
-    // newNoteArrayAfterDeleteNote.push(parseData)
-    // console.log('delete 3',newNoteArrayAfterDeleteNote)
 
     // I need to reassign the Ids to each of the remaining notes
     parseData.forEach((item, i) => {
