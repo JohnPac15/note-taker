@@ -99,7 +99,7 @@ app.delete(`/api/notes/:number`, (req, res) => {
     fs.writeFile("./db/db.json", stringNote, (writeErr) =>
       writeErr
         ? console.error(writeErr)
-        : console.log("---deleted note successfully---"),
+        : console.log("---deleted note successfully---")
     );
   });
 });
