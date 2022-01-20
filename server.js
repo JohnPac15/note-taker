@@ -15,27 +15,27 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const writeFile = function (stringData) {
-  // write the updates notes back to the file
-  fs.writeFile("./db/db.json", stringData, (writeErr) =>
-    writeErr
-      ? console.error(writeErr)
-      : console.log("---updated note successfully---")
-  );
-};
+// const writeFile = function (stringData) {
+//   // write the updates notes back to the file
+//   fs.writeFile("./db/db.json", stringData, (writeErr) =>
+//     writeErr
+//       ? console.error(writeErr)
+//       : console.log("---updated note successfully---")
+//   );
+// };
 
 app.get("/api/notes", (req, res) => {
   fs.readFile("./db/db.json", "utf-8", (err, data) => {
-    const noteParse = JSON.parse(data)
-    console.log('---GET 1---', noteParse)
+    const noteParse = JSON.parse(data);
+    console.log("---GET 1---", noteParse);
     if (noteParse == []) {
-      console.log('---GET 2---', noteParse)
+      console.log("---GET 2---", noteParse);
       return res.json(noteParse);
     } else {
       if (err) {
         throw err;
       } else {
-        console.log('---GET 3---', noteParse)
+        console.log("---GET 3---", noteParse);
         return res.json(noteParse);
       }
     }
@@ -55,7 +55,7 @@ app.post("/api/notes", (req, res) => {
   //reading what is currently on the db.json file
   fs.readFile("./db/db.json", "utf-8", (err, data) => {
     if (err) throw err;
-    
+
     //covert data from the db.json file from a string into JSON object
     const parseData = JSON.parse(data);
 
@@ -74,10 +74,15 @@ app.post("/api/notes", (req, res) => {
       const stringNote = JSON.stringify(parseData);
       console.log("---readfile 4---", stringNote);
 
-      return writeFile(stringNote);
+      // write the updates notes back to the file
+      fs.writeFile("./db/db.json", stringNote, (writeErr) =>
+        writeErr
+          ? console.error(writeErr)
+          : console.log("---updated note successfully---")
+      );
 
+      return res.json(stringNote);
     } else {
-
       console.log("---readfile 5---", parseData);
 
       //add the new noteNote we made above to the db.json array
@@ -93,7 +98,15 @@ app.post("/api/notes", (req, res) => {
       //turn all the new data into a string for write file to work
       const stringNote = JSON.stringify(parseData);
       console.log("---readfile 8 ---", stringNote);
-      return writeFile(stringNote);
+
+      // write the updates notes back to the file
+      fs.writeFile("./db/db.json", stringNote, (writeErr) =>
+        writeErr
+          ? console.error(writeErr)
+          : console.log("---updated note successfully---")
+      );
+
+      return res.json(stringNote);
     }
   });
 });
@@ -115,22 +128,28 @@ app.delete(`/api/notes/:number`, (req, res) => {
     let spliceSelectedIndex = parseData.splice(x, 1);
     console.log(spliceSelectedIndex, "---delete 2---", parseData);
 
-    if(parseData === []) {
-      console.log('---detele 3---', parseData)
-      return writeFile(parseData)
-    } 
-    else {
+    if (parseData === []) {
+      console.log("---detele 3---", parseData);
+      return writeFile(parseData);
+    } else {
       // I need to reassign the Ids to each of the remaining notes
       parseData.forEach((item, i) => {
         item.id = i;
       });
       console.log("---delete 4---", parseData);
-  
+
       // turn all the new data into a string for write file to work
       const stringNote = JSON.stringify(parseData);
       console.log("---delete 5---", stringNote);
 
-      return writeFile(stringNote)
+      // write the updates notes back to the file
+      fs.writeFile("./db/db.json", stringNote, (writeErr) =>
+        writeErr
+          ? console.error(writeErr)
+          : console.log("---updated note successfully---")
+      );
+
+      return res.json(stringNote);
     }
   });
 });
