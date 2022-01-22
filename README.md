@@ -67,6 +67,6 @@ Download and go
  Made by John Pacini
 
 REPO- https://github.com/JohnPac15/note-taker
- Heroku - https://mysterious-shelf-12036.herokuapp.com/notes
+ Heroku - https://mysterious-shelf-12036.herokuapp.com
  Github- https://github.com/Johnpac15
  Email- Johnpac15@yahoo.com
