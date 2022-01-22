@@ -66,6 +66,7 @@ Download and go
  ## Questions 
  Made by John Pacini
 
+REPO- https://github.com/JohnPac15/note-taker
+ Heroku - https://mysterious-shelf-12036.herokuapp.com/notes
  Github- https://github.com/Johnpac15
  Email- Johnpac15@yahoo.com
- Heroku - https://mysterious-shelf-12036.herokuapp.com/notes
